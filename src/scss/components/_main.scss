@@ -1,0 +1,57 @@
+@use "../util" as *;
+
+.sec1 {
+  margin-bottom: 3.5rem;
+}
+
+main {
+  margin: 7rem 0;
+  .container {
+    width: initial;
+  }
+
+  .sec1 img {
+    margin-inline: auto;
+  }
+
+  article {
+    text-align: center;
+    padding: 1.5rem 2rem;
+    max-width: 600px;
+    margin-inline: auto;
+  }
+}
+
+@media (min-width: 768px) {
+  main .container {
+    width: min(90%, 960px);
+  }
+
+  main .sec1 {
+    position: relative;
+
+    picture {
+      width: min(80%, 650px);
+    }
+
+    article {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      background-color: $clr-bg;
+      width: min(64%, 480px);
+
+      &::after {
+        content: "";
+        background-color: $clr-text;
+        opacity: 0.1;
+        position: absolute;
+        inset: 0;
+      }
+    }
+
+    h2 {
+      font-size: clamp(1rem, calc(0.57rem + 0.89vw), 1.13rem);
+    }
+  }
+}

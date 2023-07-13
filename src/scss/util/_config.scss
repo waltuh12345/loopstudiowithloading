@@ -1,0 +1,113 @@
+@use "../util/fa" as *;
+//=====COLORS======//
+:root {
+  --bg: #121212;
+  --text: #ffffff;
+
+  --err: #cf6679;
+  --primary: #bb86fc;
+  --neutral: #03dac6;
+}
+
+$clr-bg: #121212;
+$clr-text: #ffffff;
+$clr-primary: #83caff;
+$clr-neutral: #03dac6;
+$clr-err: #cf6679;
+
+//=========MIXINS==========//
+.dark-bg {
+  background-color: var(--bg);
+  color: var(--text);
+}
+
+@mixin overlay($opacity) {
+  background-color: var(--bg);
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: white;
+    opacity: $opacity;
+  }
+}
+
+@mixin flex($fd, $gap) {
+  display: flex;
+  flex-direction: $fd;
+  gap: $gap;
+}
+
+@mixin hovered($property, $clr) {
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      #{$property}: $clr;
+    }
+  }
+}
+
+@mixin clicked($clr) {
+  &:active {
+    color: $clr;
+  }
+}
+
+@mixin absolute-bg() {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+@mixin changeBg($screen, $opacity) {
+  min-height: 40rem;
+  position: relative;
+
+  &::before {
+    @include absolute-bg();
+    background: url("../assets/images/#{$screen}/image-hero.jpg") no-repeat
+      center center/cover;
+    z-index: -2;
+  }
+
+  &::after {
+    @include absolute-bg();
+    background-color: $clr-bg;
+    opacity: $opacity;
+    z-index: -1;
+  }
+}
+
+@mixin changeMenu($condition) {
+  @include fa-icon;
+  font-size: 24px;
+  padding: 0;
+
+  @if $condition {
+    @include fa-icon-solid($fa-var-close);
+  } @else {
+    @include fa-icon-solid($fa-var-bars);
+  }
+}
+
+//=========FONTS=========//
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap");
+$ff: "Montserrat", sans-serif;
+$heading: clamp(1.31rem, calc(-0.94rem + 11.25vw), 1.88rem);
+$sub-heading: clamp(1.13rem, calc(-0.62rem + 8.75vw), 1.56rem);
+
+$regular: 400;
+$medium: 500;
+$semibold: 600;
+$bold: 700;
+
+h1 {
+  font-size: $heading;
+}
+
+h2 {
+  font-size: $sub-heading;
+}
+
+//======STYLES=====//

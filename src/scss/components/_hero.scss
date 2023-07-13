@@ -1,0 +1,116 @@
+@use "../util" as *;
+body {
+  background-color: $clr-bg;
+  color: $clr-text;
+  font-family: $ff;
+  font-weight: $medium;
+  font-size: 14px;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.1;
+  font-weight: $semibold;
+  margin-bottom: 1rem;
+}
+
+section {
+  padding: 1rem 0;
+}
+
+button {
+  @extend .reset-btn;
+}
+
+svg {
+  fill: $clr-text;
+  stroke: $clr-text;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+#hero {
+  @include changeBg(mobile, 0.1);
+  .container {
+    min-height: inherit;
+    position: relative;
+  }
+
+  h1 {
+    @extend .center-vertical;
+    max-width: 430px;
+    padding: 1rem;
+    border: 3px solid rgba($clr-text, 0.6);
+    margin: 0;
+  }
+
+  svg {
+    stroke: initial;
+  }
+}
+
+#hero .container {
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 0;
+  }
+
+  .logo {
+    z-index: 2;
+  }
+
+  ul {
+    @include flex(column, 2rem 1rem);
+  }
+
+  button {
+    @include changeMenu(false);
+    z-index: 2;
+
+    &.active {
+      @include changeMenu(true);
+      animation: pulse 1s;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .menu {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background-color: $clr-bg;
+    z-index: 1;
+
+    ul {
+      margin-top: 8rem;
+      animation: fadeInLeft 500ms;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  #hero {
+    @include changeBg(desktop, 0.6);
+    min-height: 34rem;
+  }
+
+  #hero .container {
+    button {
+      display: none;
+    }
+
+    ul {
+      flex-direction: row;
+      width: initial;
+      animation: fadeInRight 800ms;
+    }
+  }
+}

@@ -1,0 +1,95 @@
+@use "../util" as *;
+.caption {
+  padding: 1rem;
+  font-weight: $semibold;
+  font-size: clamp(1rem, calc(0rem + 5vw), 1.25rem);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+main .sec2 {
+  h2 {
+    text-align: center;
+    font-size: $heading;
+  }
+
+  picture {
+    position: relative;
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-color: $clr-bg;
+      opacity: 0.4;
+    }
+  }
+
+  img {
+    margin: 0;
+    aspect-ratio: initial;
+    aspect-ratio: 16/9;
+    width: 100%;
+  }
+
+  ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  }
+
+  li {
+    position: relative;
+    .caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+    }
+  }
+
+  button {
+    display: block;
+    padding: 0;
+    padding: 0.7rem 2.4rem;
+    margin-inline: auto;
+    outline: 2px solid rgba(white, $alpha: 0.2);
+    margin-top: 3rem;
+    transition: background-color 0.6s, color 0.6s, outline-color 0.6s;
+    @include hovered(background-color, $clr-text);
+    @include hovered(color, $clr-bg);
+    font-weight: $semibold;
+
+    &:hover {
+      outline: none;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  main .sec2 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 2rem 0;
+    align-items: flex-end;
+
+    h2 {
+      text-align: initial;
+      margin: 0;
+    }
+
+    ul {
+      width: 100%;
+      flex-shrink: 0;
+      order: 3;
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    .caption {
+      font-size: clamp(0.88rem, calc(0.21rem + 1.39vw), 1.25rem);
+    }
+
+    button {
+      margin: 0;
+    }
+  }
+}

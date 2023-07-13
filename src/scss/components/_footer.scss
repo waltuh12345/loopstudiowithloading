@@ -1,0 +1,79 @@
+@use "../util" as *;
+
+@mixin footerOverlay($clr, $index) {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: $clr;
+  z-index: $index;
+}
+
+footer {
+  position: relative;
+
+  svg {
+    stroke: initial;
+  }
+
+  &::after {
+    @include footerOverlay($clr-bg, -2);
+  }
+
+  &::before {
+    @include footerOverlay($clr-text, -1);
+    opacity: 0.1;
+  }
+}
+
+footer .container {
+  padding: 2rem 0;
+  text-align: center;
+  @include flex(column, 1rem);
+
+  > * {
+    @include flex(column, 0);
+    align-items: center;
+  }
+
+  .box1 {
+    @include flex(column, 2rem);
+    ul {
+      display: grid;
+      gap: 1rem;
+    }
+  }
+
+  .box2 {
+    @include flex(column, 1rem);
+    ul {
+      @include flex(row, 1.4rem);
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  footer .container {
+    text-align: initial;
+    @include flex(row, 0);
+    justify-content: space-between;
+    align-items: baseline;
+
+    > * {
+      align-items: initial;
+    }
+
+    .box1 {
+      @include flex(column, 0.7rem);
+      ul {
+        @include flex(row, 1rem);
+      }
+    }
+
+    .box2 {
+      @include flex(column, 0.7rem);
+      ul {
+        justify-content: flex-end;
+      }
+    }
+  }
+}
